@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { useCallback, useMemo, useState, useTransition } from "react";
 
 import Sorter from "@/components/Sorter";
-import { DATA_COUNT } from "@/pages/TableTest/common/constants";
 import {
   FirstTh,
   LastTh,
@@ -12,10 +11,11 @@ import {
   THead,
   Tr,
 } from "@/pages/TableTest/common/styles";
-import { generateMockData } from "@/pages/TableTest/common/utils";
 import Row from "@/pages/TableTest/Component/Row";
 
-const MOCK_DATA = generateMockData(DATA_COUNT);
+interface IProps {
+  data: any;
+}
 
 // 정렬 설정 타입
 interface ISortConfig {
@@ -23,7 +23,7 @@ interface ISortConfig {
   direction: "ASC" | "DESC" | "NONE";
 }
 
-const Component = () => {
+const Component = ({ data }: IProps) => {
   const [isPending, startTransition] = useTransition();
   const [sortConfig, setSortConfig] = useState<ISortConfig>({
     key: "",
@@ -32,18 +32,18 @@ const Component = () => {
 
   const sortedData = useMemo(() => {
     const { key, direction } = sortConfig;
-    if (direction === "NONE" || !key) return MOCK_DATA;
+    if (direction === "NONE" || !key) return data;
 
     const isAsc = direction === "ASC";
 
-    return [...MOCK_DATA].sort((a, b) => {
+    return [...data].sort((a, b) => {
       const aVal = a.sortKeys[key];
       const bVal = b.sortKeys[key];
 
       if (aVal === bVal) return 0;
       return isAsc ? (aVal > bVal ? 1 : -1) : aVal < bVal ? 1 : -1;
     });
-  }, [sortConfig]);
+  }, [data, sortConfig]);
 
   const getSortDirection = (key: string) => {
     return sortConfig.key === key ? sortConfig.direction : "NONE";
@@ -176,8 +176,8 @@ const Component = () => {
         </THead>
 
         <TBody>
-          {sortedData.map((data) => (
-            <Row key={data.id} data={data}></Row>
+          {sortedData.map((item: any) => (
+            <Row key={item.id} data={item}></Row>
           ))}
         </TBody>
       </Table>

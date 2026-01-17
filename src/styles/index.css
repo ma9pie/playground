@@ -1,6 +1,4 @@
-@import "normalize.css";
-@import "reset-css";
-
+@import "@/styles/reset.css";
 :root {
   height: 100%;
 }

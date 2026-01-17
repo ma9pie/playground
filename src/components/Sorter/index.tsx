@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { type ReactNode, useState } from "react";
+import { type ReactNode } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
 type SortDirection = "ASC" | "DESC" | "NONE";

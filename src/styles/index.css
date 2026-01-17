@@ -2,6 +2,11 @@
 @import "reset-css";
 
 :root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* layout 확인용 class */

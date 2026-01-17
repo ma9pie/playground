@@ -27,6 +27,7 @@ export default defineConfig([
       "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
 ]);
